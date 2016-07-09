@@ -23,7 +23,22 @@ module.exports = {
         loaders: [ 'babel' ],
         exclude: /node_modules/,
         include: __dirname
+      },
+      {
+        test: /\.scss$/,
+        loader: 'style!css!sass'
+      },
+      {
+        test: /\.less$/,
+        loader: 'style!css!less'
+      },
+      {
+        test: /\.(png|jpg|svg|ttf|woff|woff2|eot)$/,
+        loader: 'url?limit=25000'
       }
     ]
+  },
+  devServer: {
+      historyApiFallback: true
   }
 }
