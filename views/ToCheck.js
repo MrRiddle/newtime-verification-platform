@@ -10,22 +10,26 @@ const ToCheck = React.createClass({
                 {
                     id: '001',
                     name: '尼古拉斯·赵四',
-                    gender: '男'
+                    gender: '男',
+                    address: '广东省深圳市深南大道10000号'
                 },
                 {
                     id: '002',
                     name: '尼古拉斯·赵四',
-                    gender: '男'
+                    gender: '男',
+                    address: '广东省深圳市深南大道10000号'
                 },
                 {
                     id: '003',
                     name: '尼古拉斯·赵四',
-                    gender: '男'
+                    gender: '男',
+                    address: '广东省深圳市深南大道10000号'
                 },
                 {
                     id: '004',
                     name: '尼古拉斯·赵四',
-                    gender: '男'
+                    gender: '男',
+                    address: '广东省深圳市深南大道10000号'
                 }
             ]
         }
@@ -43,6 +47,7 @@ const ToCheck = React.createClass({
                             <th>#</th>
                             <th>姓名</th>
                             <th>性别</th>
+                            <th>家庭住址</th>
                             <th>审核</th>
                         </tr>
                     </thead>
@@ -54,6 +59,7 @@ const ToCheck = React.createClass({
                                     <td>{item.id}</td>
                                     <td>{item.name}</td>
                                     <td>{item.gender}</td>
+                                    <td>{item.address}</td>
                                     <td>
                                         <button type="button" className="btn btn-primary btn-xs">审核</button>
                                     </td>

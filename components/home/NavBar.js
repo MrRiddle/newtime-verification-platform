@@ -1,5 +1,6 @@
 import React from 'react'
 import { bootstrap } from 'bootstrap'
+import { Link } from 'react-router'
 
 import icon from '../../img/icon-48.png'
 
@@ -24,10 +25,10 @@ const NavBar = React.createClass({
                                 </a>
                                 <ul className="dropdown-menu">
                                     <li>
-                                        <a href="#">
+                                        <Link to="/login" >
                                             <span className="glyphicon glyphicon-off"></span>
                                             <span className="text">登出</span>
-                                        </a>
+                                        </Link>
                                     </li>
                                 </ul>
                             </li>
