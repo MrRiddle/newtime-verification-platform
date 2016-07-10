@@ -1,5 +1,4 @@
 import React from 'react'
-import { jQuery } from 'jquery'
 import { bootstrap } from 'bootstrap'
 
 import icon from '../../img/icon-48.png'

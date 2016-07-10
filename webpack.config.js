@@ -14,7 +14,13 @@ module.exports = {
   },
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.ProvidePlugin({
+            $: "jquery",
+            jQuery: "jquery"
+    }),
+    new webpack.IgnorePlugin(/jsdom$/),
+    new webpack.IgnorePlugin(/xmlhttprequest$/)
   ],
   module: {
     loaders: [
@@ -35,6 +41,14 @@ module.exports = {
       {
         test: /\.(png|jpg|svg|ttf|woff|woff2|eot)$/,
         loader: 'url?limit=25000'
+      },
+	    {
+        test: /\.json$/,
+        loader: 'json'
+      },
+      {
+        test: path.resolve(__dirname, 'jquery/jquery.min.js'),
+        loader: 'expose?jQuery'
       }
     ]
   },

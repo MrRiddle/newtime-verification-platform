@@ -21,9 +21,14 @@
     "css-loader": "^0.23.1",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.9.0",
+    "fs": "0.0.2",
     "jQuery": "^1.7.4",
+    "jsdom": "^9.4.1",
+    "json-loader": "^0.5.4",
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
+    "location": "0.0.1",
+    "navigator": "^1.0.1",
     "node-sass": "^3.8.0",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
@@ -32,7 +37,8 @@
     "redux": "^3.1.2",
     "sass-loader": "^4.0.0",
     "style-loader": "^0.13.1",
-    "url-loader": "^0.5.7"
+    "url-loader": "^0.5.7",
+    "xmlhttprequest": "^1.8.0"
   },
   "devDependencies": {
     "babel-core": "^6.3.15",

@@ -9,6 +9,7 @@ const Home = React.createClass({
     return (
             <div className="home-view">
                 <Nav name="食光后台认证系统" />
+                
             </div>
         )
   }
