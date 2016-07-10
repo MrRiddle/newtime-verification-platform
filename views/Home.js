@@ -10,13 +10,13 @@ const Home = React.createClass({
     const CATEGORY = [
         {
             key: 'todoList',
-            path: '/home/tocheck',
+            path: 'tocheck',
             name: '待认证名单',
             icon: 'time'
         },
         {
             key: 'doneList',
-            path: '/home/checked',
+            path: 'checked',
             name: '已通过名单',
             icon: 'ok'
         }

@@ -4,18 +4,6 @@ import { Link } from 'react-router'
 
 const MasterPanel = React.createClass({
 
-    getInitialState: function() {
-        return {
-            actived: 'todoList'
-        }
-    },
-
-    _handleClick(key) {
-        this.setState({
-            actived: key
-        });
-    },
-
     render() {
         var self = this;
         return (
@@ -23,9 +11,8 @@ const MasterPanel = React.createClass({
                 <div className="list-group">
                 {
                     this.props.category.map((item) => {
-                        let isActived = (self.state.actived === item.key);
                         return (
-                            <Link to={item.path} className={'list-group-item' + (isActived?' active':'')} key={item.key} onClick={() => {self._handleClick(item.key)}}>
+                            <Link to={`/home/${item.path}`} className="list-group-item" activeClassName="list-group-item active" key={item.key} >
                                 <span className={'glyphicon glyphicon-'+item.icon}></span>
                                 <span className="text">{item.name}</span>
                             </Link>
