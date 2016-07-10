@@ -1,6 +1,48 @@
 .home-view {
+
+    height: 100%;
     
-    .navbar {
-        background-color: #9cc;
+    .nav-bar {
+        .navbar {
+            background-color: #9cc;
+
+            .dropdown-menu {
+                .text {
+                    margin-left: 10px;
+                }
+            }
+        }
+    }
+
+    .main-panel{
+        margin-top: -20px;
+        height: 100%;
+
+
+        .master-panel {
+            height: 100%;
+            width: 180px;
+            background-color: #999;
+            display: inline-block;
+            overflow-y: auto;
+            border: 2px #666 solid;
+
+            .list-group {
+                text-align: center;
+                .text {
+                    margin-left: 10px;
+                }
+            }
+        }
+
+        .detail-panel {
+            width: calc(~"100% - 180px");
+            height: 100%;
+            border: 2px #666 solid;
+            background-color: #fff;
+            overflow-y: auto;
+            display: inline-block;
+        }
+
     }
 }

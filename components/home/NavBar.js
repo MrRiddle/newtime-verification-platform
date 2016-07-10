@@ -3,10 +3,10 @@ import { bootstrap } from 'bootstrap'
 
 import icon from '../../img/icon-48.png'
 
-const Nav = React.createClass({
+const NavBar = React.createClass({
   render() {
     return (
-        <div>
+        <div className="nav-bar">
             <nav className="navbar">
                 <div className="container-fluid">
                     <div className="navbar-header">
@@ -24,7 +24,10 @@ const Nav = React.createClass({
                                 </a>
                                 <ul className="dropdown-menu">
                                     <li>
-                                        <a href="#">登出</a>
+                                        <a href="#">
+                                            <span className="glyphicon glyphicon-off"></span>
+                                            <span className="text">登出</span>
+                                        </a>
                                     </li>
                                 </ul>
                             </li>
@@ -37,4 +40,4 @@ const Nav = React.createClass({
   }
 })
 
-export default Nav
+export default NavBar

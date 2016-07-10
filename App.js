@@ -3,7 +3,7 @@ import React from 'react'
 const App = React.createClass({
   render(){
     return (
-      <div>
+      <div className="app">
         {this.props.children}
       </div>
     )
