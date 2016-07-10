@@ -1,4 +1,5 @@
 import React from 'react'
+import { browserHistory } from 'react-router'
 
 import '../less/checked.less';
 
@@ -35,6 +36,12 @@ const Checked = React.createClass({
         }
     },
 
+    handleCheck: function(e,id) {
+        e.preventDefault();
+        const path = `/home/checked/${id}`;
+        browserHistory.push(path)
+    },
+
     render() {
         return (
             <div className="checked-view">
@@ -61,7 +68,7 @@ const Checked = React.createClass({
                                     <td>{item.gender}</td>
                                     <td>{item.address}</td>
                                     <td>
-                                        <button type="button" className="btn btn-primary btn-xs">修改</button>
+                                        <button type="button" className="btn btn-primary btn-xs" onClick={(e) => {this.handleCheck(e,item.id)}}>修改</button>
                                     </td>
                                 </tr>
                             )

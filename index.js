@@ -11,6 +11,8 @@ import Login from './views/Login'
 import Home from './views/Home'
 import ToCheck from './views/ToCheck'
 import Checked from './views/Checked'
+import ToCheckDetail from './views/ToCheckDetail'
+import CheckedDetail from './views/CheckedDetail'
 
 import './main.less';
 
@@ -27,6 +29,8 @@ render(
                         <IndexRedirect to="tocheck" component={ToCheck} />
                         <Route path="tocheck" component={ToCheck} />
                         <Route path="checked" component={Checked} />
+                        <Route path="tocheck/:id" component={ToCheckDetail} />
+                        <Route path="checked/:id" component={CheckedDetail} />
                     </Route>
                 </Route>
             </Router>

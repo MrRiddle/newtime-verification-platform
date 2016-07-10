@@ -1,4 +1,5 @@
 import React from 'react'
+import { browserHistory } from 'react-router'
 
 import '../less/to_check.less';
 
@@ -35,6 +36,12 @@ const ToCheck = React.createClass({
         }
     },
 
+    handleCheck: function(e,id) {
+        e.preventDefault();
+        const path = `/home/tocheck/${id}`;
+        browserHistory.push(path)
+    },
+
     render() {
         return (
             <div className="to-check-view">
@@ -61,7 +68,7 @@ const ToCheck = React.createClass({
                                     <td>{item.gender}</td>
                                     <td>{item.address}</td>
                                     <td>
-                                        <button type="button" className="btn btn-primary btn-xs">审核</button>
+                                        <button type="button" className="btn btn-primary btn-xs" onClick={(e) => {this.handleCheck(e,item.id)}}>审核</button>
                                     </td>
                                 </tr>
                             )

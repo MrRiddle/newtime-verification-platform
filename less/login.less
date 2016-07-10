@@ -1,5 +1,18 @@
 .login-view {
+    @keyframes in-ani
+    {
+        from {
+            margin-top: 100px;
+            opacity: .2;
+        }
+        to {
+            margin-top: 180px;
+            opacity: 1;
+        }
+    }
+
     margin-top: 180px;
+    animation: in-ani 2s;
 
     .title {
         text-align: center;
