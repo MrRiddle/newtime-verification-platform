@@ -19,13 +19,13 @@ const CheckedDetail = React.createClass({
     handlePass: function(e) {
         e.preventDefault();
         const path = `/home/checked`;
-        browserHistory.push(path)
+        browserHistory.push(path);
     },
 
     handleFail: function(e) {
         e.preventDefault();
         const path = `/home/checked`;
-        browserHistory.push(path)
+        browserHistory.push(path);
     },
 
     render() {

@@ -1,20 +1,44 @@
 import React from 'react'
 import { browserHistory } from 'react-router'
+import Cookies from 'js-cookie'
 
 import icon_96 from '../../img/icon-96.png'
 
 const LoginPanel = React.createClass({
 
+    getInitialState: function() {
+        return {msg: ''};
+    },
+
     handleSubmit(e) {
         e.preventDefault();
-        const userName = e.target.elements[0].value
-        const password = e.target.elements[1].value
-        //const path = `/repos/${userName}/${repo}`
-        const path = "/home";
-        browserHistory.push(path)
+        const username = e.target.elements[0].value;
+        const password = e.target.elements[1].value;
+        const self = this;
+        $.post("/login", {
+            username: username,
+            password: password
+        }).done((data,status) => {
+            const isAuth = data.auth;
+            if(isAuth){
+                Cookies.set('username', username);
+                browserHistory.push('/home')
+            }else{
+                self.setState({msg: data.msg});
+                browserHistory.push('/login')
+            }
+        });
     },
 
     render() {
+        let failMsg;
+        if('' !== this.state.msg){
+            failMsg = (<div className="alert alert-danger" role="alert">
+                <strong>登录失败！</strong>
+                {this.state.msg}
+            </div>)
+        }
+
         return (
             <div className="row login-panel">
                 <div className="panel panel-default col-xs-6 col-xs-offset-3 col-md-4 col-md-offset-4">
@@ -28,6 +52,7 @@ const LoginPanel = React.createClass({
                             <button type="submit" className="btn btn-primary btn-block">登录</button>
                         </form>
                     </div>
+                    {failMsg}
                 </div>
             </div>
         )

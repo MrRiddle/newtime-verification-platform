@@ -1,10 +1,20 @@
 import React from 'react'
 import { bootstrap } from 'bootstrap'
 import { Link } from 'react-router'
+import { browserHistory } from 'react-router'
+import Cookies from 'js-cookie'
 
 import icon from '../../img/icon-48.png'
 
 const NavBar = React.createClass({
+
+    handleLogout(e) {
+        e.preventDefault();
+        Cookies.remove('username');
+        Cookies.remove('_token');
+        browserHistory.push('/login')
+    },
+
   render() {
     return (
         <div className="nav-bar">
@@ -20,15 +30,15 @@ const NavBar = React.createClass({
                             <li className="dropdown">
                                 <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                     <span className="glyphicon glyphicon-user"></span>
-                                    欢迎您！{'admin'}
+                                    欢迎您！{Cookies.get('username')}
                                     <span className="caret"></span>
                                 </a>
                                 <ul className="dropdown-menu">
                                     <li>
-                                        <Link to="/login" >
+                                        <a onClick={this.handleLogout} >
                                             <span className="glyphicon glyphicon-off"></span>
                                             <span className="text">登出</span>
-                                        </Link>
+                                        </a>
                                     </li>
                                 </ul>
                             </li>
