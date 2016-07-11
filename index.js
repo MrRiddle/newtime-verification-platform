@@ -5,7 +5,7 @@ import { Router, Route, IndexRoute, IndexRedirect, browserHistory } from 'react-
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import Cookies from 'js-cookie'
-import todoApp from './reducers'
+import shiguangApp from './reducers'
 
 import App from './App'
 import Login from './views/Login'
@@ -17,7 +17,7 @@ import CheckedDetail from './views/CheckedDetail'
 
 import './main.less'
 
-let store = createStore(todoApp)
+let store = createStore(shiguangApp)
 
 var requireAuth = (nextState, replace) => {
     const hasLogin = Cookies.get('username');

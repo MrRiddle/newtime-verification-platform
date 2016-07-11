@@ -1,22 +1,30 @@
-let nextTodoId = 0
-export const addTodo = (text) => {
+
+export const REQUEST_TO_CHECK_LIST = 'REQUEST_TO_CHECK_LIST';
+export const requestToCheckList = () => {
   return {
-    type: 'ADD_TODO',
-    id: nextTodoId++,
-    text
+    type: REQUEST_TO_CHECK_LIST
   }
 }
 
-export const setVisibilityFilter = (filter) => {
+export const RECIVE_TO_CHECK_LIST = 'RECIVE_TO_CHECK_LIST';
+export const reciveToCheckList = (data) => {
   return {
-    type: 'SET_VISIBILITY_FILTER',
-    filter
+    type: RECIVE_TO_CHECK_LIST,
+    data
   }
 }
 
-export const toggleTodo = (id) => {
+export const REQUEST_CHECKED_LIST = 'REQUEST_CHECKED_LIST';
+export const requestCheckedList = () => {
   return {
-    type: 'TOGGLE_TODO',
-    id
+    type: REQUEST_CHECKED_LIST
+  }
+}
+
+export const RECIVE_CHECKED_LIST = 'RECIVE_CHECKED_LIST';
+export const reciveCheckedList = (data) => {
+  return {
+    type: RECIVE_CHECKED_LIST,
+    data
   }
 }
