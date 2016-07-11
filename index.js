@@ -19,17 +19,17 @@ import './main.less'
 
 let store = createStore(todoApp)
 
-var requireAuth = (nextState, replaceState) => {
+var requireAuth = (nextState, replace) => {
     const hasLogin = Cookies.get('username');
     if (!hasLogin) {
-        replaceState({ nextPathname: nextState.location.pathname }, '/login');
+        replace('/login');
     }
 }
 
-var hasAuth = (nextState, replaceState) => {
+var hasAuth = (nextState, replace) => {
     const hasLogin = Cookies.get('username');
     if (hasLogin) {
-        replaceState({ nextPathname: nextState.location.pathname }, '/home');
+        replace('/home');
     }
 }
 
