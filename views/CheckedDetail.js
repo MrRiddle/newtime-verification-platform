@@ -54,8 +54,24 @@ const CheckedDetail = React.createClass({
                             <td>{info.gender}</td>
                         </tr>
                         <tr>
+                            <th>身份证号</th>
+                            <td>{info.identity}</td>
+                        </tr>
+                        <tr>
                             <th>地址</th>
                             <td>{info.address}</td>
+                        </tr>
+                        <tr>
+                            <th>头像</th>
+                            <td>
+                                <img src={info.headimgurl} width="640px" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>厨房照片</th>
+                            <td>
+                                <img src={info.homeimgurl} width="640px" />
+                            </td>
                         </tr>
                     </tbody>
                 </table>

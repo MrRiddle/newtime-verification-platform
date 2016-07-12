@@ -32,6 +32,7 @@ const ToCheck = React.createClass({
                             <th>#</th>
                             <th>姓名</th>
                             <th>性别</th>
+                            <th>身份证号</th>
                             <th>家庭住址</th>
                             <th>审核</th>
                         </tr>
@@ -44,6 +45,7 @@ const ToCheck = React.createClass({
                                     <td>{item.id}</td>
                                     <td>{item.name}</td>
                                     <td>{item.gender}</td>
+                                    <td>{item.identity}</td>
                                     <td>{item.address}</td>
                                     <td>
                                         <button type="button" className="btn btn-primary btn-xs" onClick={(e) => {this.handleCheck(e,item.id)}}>审核</button>

@@ -37,18 +37,20 @@ app.listen(port, function(error) {
   }
 })
 
-const db;
-function connect () {
+var db;
+connect();
+function connect() {
   db = mysql.createConnection({
-    host: '',
-    user: '',
-    password: '',
-    port: ''
+    host: '119.29.233.72',
+    port: '3306',
+    user: 'root',
+    password: 'root',
+    database : 'eattimedata'
   });
   db.connect(handleError);
   db.on('error', handleError);
 }
-function handleError (err) {
+function handleError(err) {
   if (err) {
     // 如果是连接断开，自动重新连接
     if (err.code === 'PROTOCOL_CONNECTION_LOST') {
@@ -79,33 +81,25 @@ app.post("/login", (req, res) => {
 
 app.post("/getToCheckList", (req, res) => {
    if(isLegal(req)){
-        const list = [
-                {
-                    id: '001',
-                    name: '尼古拉斯·赵四',
-                    gender: '男',
-                    address: '广东省深圳市深南大道10000号'
-                },
-                {
-                    id: '002',
-                    name: '尼古拉斯·赵四',
-                    gender: '男',
-                    address: '广东省深圳市深南大道10000号'
-                },
-                {
-                    id: '003',
-                    name: '尼古拉斯·赵四',
-                    gender: '男',
-                    address: '广东省深圳市深南大道10000号'
-                },
-                {
-                    id: '004',
-                    name: '尼古拉斯·赵四',
-                    gender: '男',
-                    address: '广东省深圳市深南大道10000号'
-                }
-            ];
-        res.json({list});
+
+        db.query('SELECT id,username,location,identity,sex FROM users WHERE confirm=0', (err, results) => {
+            if (err){
+                console.log(err);
+                res.send(500, { error: '数据库查询失败。' });
+            }else{
+                const list = results.map(item => ({
+                    id: item.id,
+                    name: item.username,
+                    gender: ('male'===(item.sex))?'男':'女',
+                    address: item.location,
+                    identity: item.identity
+                }));
+
+                res.json({list});
+
+            }
+        });
+        
     }else{
         res.send(500, { error: '用户状态有误。' });
     }
@@ -114,33 +108,23 @@ app.post("/getToCheckList", (req, res) => {
 
 app.post("/getCheckedList", (req, res) => {
     if(isLegal(req)){
-        const list = [
-                {
-                    id: '001',
-                    name: '尼古拉斯·赵四',
-                    gender: '男',
-                    address: '广东省深圳市深南大道10000号'
-                },
-                {
-                    id: '002',
-                    name: '尼古拉斯·赵四',
-                    gender: '男',
-                    address: '广东省深圳市深南大道10000号'
-                },
-                {
-                    id: '003',
-                    name: '尼古拉斯·赵四',
-                    gender: '男',
-                    address: '广东省深圳市深南大道10000号'
-                },
-                {
-                    id: '004',
-                    name: '尼古拉斯·赵四',
-                    gender: '男',
-                    address: '广东省深圳市深南大道10000号'
-                }
-            ];
-        res.json({list});
+       db.query('SELECT id,username,location,identity,sex FROM users WHERE confirm=1', (err, results) => {
+            if (err){
+                console.log(err);
+                res.send(500, { error: '数据库查询失败。' });
+            }else{
+                const list = results.map(item => ({
+                    id: item.id,
+                    name: item.username,
+                    gender: ('male'===(item.sex))?'男':'女',
+                    address: item.location,
+                    identity: item.identity
+                }));
+
+                res.json({list});
+
+            }
+        });
     }else{
         res.send(500, { error: '用户状态有误。' });
     }
@@ -150,13 +134,25 @@ app.post("/getCheckedList", (req, res) => {
 app.post("/getDetailInfo", (req, res) => {
     if(isLegal(req)){
         const id = req.body.id;
-        const info = {
-                    id,
-                    name: '尼古拉斯·赵四',
-                    gender: '男',
-                    address: '广东省深圳市深南大道10000号'
-                };
-        res.json({info});
+        db.query('SELECT username,location,identity,sex,homeimgurl,headimgurl FROM users WHERE id=?', [id], (err, results) => {
+            if (err){
+                console.log(err);
+                res.send(500, { error: '数据库查询失败。' });
+            }else{
+                const info = results.map(item => ({
+                    id: id,
+                    name: item.username,
+                    gender: ('male'===(item.sex))?'男':'女',
+                    address: item.location,
+                    identity: item.identity,
+                    homeimgurl: item.homeimgurl,
+                    headimgurl: item.headimgurl
+                }))[0];
+
+                res.json({info});
+
+            }
+        });
     }else{
         res.send(500, { error: '用户状态有误。' });
     }
@@ -166,8 +162,18 @@ app.post("/getDetailInfo", (req, res) => {
 app.post("/setPass", (req, res) => {
     if(isLegal(req)){
         const id = req.body.id;
-        console.log("申请者 %s 通过申请。", id);
-        res.json({success: true});
+
+        db.query('UPDATE users SET confirm=1 WHERE id=?', [id], (err, results) => {
+            if (err){
+                console.log(err);
+                res.send(500, { error: '数据更新失败。' });
+            }else{
+                console.log("申请者 %s 通过申请。", id);
+                res.json({success: true});
+            }
+        });
+
+
     }else{
         res.send(500, { error: '用户状态有误。' });
     }
@@ -177,8 +183,15 @@ app.post("/setPass", (req, res) => {
 app.post("/setFail", (req, res) => {
     if(isLegal(req)){
         const id = req.body.id;
-        console.log("申请者 %s 未通过申请。", id);
-        res.json({success: true});
+        db.query('UPDATE users SET confirm=0 WHERE id=?', [id], (err, results) => {
+            if (err){
+                console.log(err);
+                res.send(500, { error: '数据更新失败。' });
+            }else{
+                console.log("申请者 %s 未通过申请。", id);
+                res.json({success: true});
+            }
+        });
     }else{
         res.send(500, { error: '用户状态有误。' });
     }
