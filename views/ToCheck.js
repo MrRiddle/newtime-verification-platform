@@ -1,39 +1,16 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import { browserHistory } from 'react-router'
+import { connect } from 'react-redux'
 
 import '../less/to_check.less';
 
+import { fetchToCheckList } from '../actions'
+
 const ToCheck = React.createClass({
 
-    getInitialState: function() {
-        return {
-            list: [
-                {
-                    id: '001',
-                    name: '尼古拉斯·赵四',
-                    gender: '男',
-                    address: '广东省深圳市深南大道10000号'
-                },
-                {
-                    id: '002',
-                    name: '尼古拉斯·赵四',
-                    gender: '男',
-                    address: '广东省深圳市深南大道10000号'
-                },
-                {
-                    id: '003',
-                    name: '尼古拉斯·赵四',
-                    gender: '男',
-                    address: '广东省深圳市深南大道10000号'
-                },
-                {
-                    id: '004',
-                    name: '尼古拉斯·赵四',
-                    gender: '男',
-                    address: '广东省深圳市深南大道10000号'
-                }
-            ]
-        }
+    componentDidMount() {
+        const { dispatch } = this.props
+        dispatch(fetchToCheckList())
     },
 
     handleCheck: function(e,id) {
@@ -43,6 +20,7 @@ const ToCheck = React.createClass({
     },
 
     render() {
+        const { list, isWaiting } = this.props;
         return (
             <div className="to-check-view">
                 <div className="page-header">
@@ -60,7 +38,7 @@ const ToCheck = React.createClass({
                     </thead>
                     <tbody>
                     {
-                        this.state.list.map((item) => {
+                        list.map((item) => {
                             return (
                                 <tr key={item.id}>
                                     <td>{item.id}</td>
@@ -81,4 +59,18 @@ const ToCheck = React.createClass({
     }
 })
 
-export default ToCheck
+ToCheck.propTypes = {
+    list: PropTypes.array.isRequired,
+    isWaiting: PropTypes.bool.isRequired,
+    dispatch: PropTypes.func.isRequired
+}
+
+function mapStateToProps(state) {
+    const { isWaiting, list } = state.toCheckList
+    return {
+        isWaiting,
+        list
+    }
+}
+
+export default connect(mapStateToProps)(ToCheck)

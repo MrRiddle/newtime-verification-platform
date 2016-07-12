@@ -1,15 +1,15 @@
-import { REQUEST_TO_CHECK_LIST, RECIVE_TO_CHECK_LIST } from '../actions'
+import { REQUEST_CHECKED_LIST, RECIVE_CHECKED_LIST } from '../actions'
 
-export function toCheckList(state = {
+export function checkedList(state = {
   isWaiting: false,
   list: []
 }, action) {
   switch (action.type) {
-    case REQUEST_TO_CHECK_LIST:
+    case REQUEST_CHECKED_LIST:
       return Object.assign({}, state, {
         isWaiting: true
       })
-    case RECIVE_TO_CHECK_LIST:
+    case RECIVE_CHECKED_LIST:
       return Object.assign({}, state, {
         isWaiting: false,
         list: action.data

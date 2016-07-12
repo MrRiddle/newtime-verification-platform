@@ -1,10 +1,14 @@
 import { combineReducers } from 'redux'
-import todos from './todos'
-import visibilityFilter from './visibilityFilter'
+import { toCheckList } from './toCheckList'
+import { checkedList } from './checkedList'
+import { detailInfo } from './detailInfo'
+import { modify } from './modify'
 
-const shiguangApp = combineReducers({
-  todos,
-  visibilityFilter
+const shiguangReducer = combineReducers({
+  toCheckList,
+  checkedList,
+  detailInfo,
+  modify
 })
 
-export default shiguangApp
+export default shiguangReducer

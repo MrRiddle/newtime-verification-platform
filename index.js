@@ -15,9 +15,12 @@ import Checked from './views/Checked'
 import ToCheckDetail from './views/ToCheckDetail'
 import CheckedDetail from './views/CheckedDetail'
 
+import shiguangStore from './store'
+import { fetchToCheckList, fetchCheckedList } from './actions'
+
 import './main.less'
 
-let store = createStore(shiguangApp)
+let store = shiguangStore()
 
 var requireAuth = (nextState, replace) => {
     const hasLogin = Cookies.get('username');

@@ -1,18 +1,20 @@
-import { REQUEST_TO_CHECK_LIST, RECIVE_TO_CHECK_LIST } from '../actions'
+import { REQUEST_DETAIL_INFO, RECIVE_DETAIL_INFO } from '../actions'
 
-export function toCheckList(state = {
+export function detailInfo(state = {
   isWaiting: false,
-  list: []
+  id: null,
+  info: {}
 }, action) {
   switch (action.type) {
-    case REQUEST_TO_CHECK_LIST:
+    case REQUEST_DETAIL_INFO:
       return Object.assign({}, state, {
         isWaiting: true
       })
-    case RECIVE_TO_CHECK_LIST:
+    case RECIVE_DETAIL_INFO:
       return Object.assign({}, state, {
         isWaiting: false,
-        list: action.data
+        id: action.id,
+        info: action.data
       })
     default:
       return state
