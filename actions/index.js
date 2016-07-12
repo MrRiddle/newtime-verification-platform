@@ -85,7 +85,8 @@ export function fetchToCheckList() {
  return (dispatch) => {
     dispatch(requestToCheckList())
     return fetch('/getToCheckList',{
-        method: "POST"
+        method: "POST",
+        credentials: 'include',
       })
       .then((response) => response.json())
       .then((json) => dispatch(reciveToCheckList(json.list)))
@@ -97,7 +98,8 @@ export function fetchCheckedList() {
  return (dispatch) => {
     dispatch(requestCheckedList())
     return fetch('/getCheckedList',{
-        method: "POST"
+        method: "POST",
+        credentials: 'include'
       })
       .then((response) => response.json())
       .then((json) => dispatch(reciveCheckedList(json.list)))
@@ -114,6 +116,7 @@ export function fetchDetailInfo(id) {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
+        credentials: 'include',
         body: JSON.stringify({
           id
         })
@@ -133,6 +136,7 @@ export function fetchSetPass(id) {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
+        credentials: 'include',
         body: JSON.stringify({
           id
         })
@@ -152,6 +156,7 @@ export function fetchSetFail(id) {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
+        credentials: 'include',
         body: JSON.stringify({
           id
         })

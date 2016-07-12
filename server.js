@@ -7,6 +7,7 @@ const session = require('express-session')
 const favicon = require('serve-favicon')
 const config = require('./webpack.config')
 const express = require('express')
+const mysql = require('mysql')
 
 
 var app = new express()
@@ -36,6 +37,29 @@ app.listen(port, function(error) {
   }
 })
 
+const db;
+function connect () {
+  db = mysql.createConnection({
+    host: '',
+    user: '',
+    password: '',
+    port: ''
+  });
+  db.connect(handleError);
+  db.on('error', handleError);
+}
+function handleError (err) {
+  if (err) {
+    // 如果是连接断开，自动重新连接
+    if (err.code === 'PROTOCOL_CONNECTION_LOST') {
+      connect();
+    } else {
+      console.error(err.stack || err);
+    }
+  }
+}
+
+
 app.post("/login", (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
@@ -54,11 +78,7 @@ app.post("/login", (req, res) => {
 });
 
 app.post("/getToCheckList", (req, res) => {
-    const username = req.cookies.username;
-    const signedUsername = req.signedCookies._token;
-    
-    const isAuth = (username === signedUsername);
-    if(isAuth){
+   if(isLegal(req)){
         const list = [
                 {
                     id: '001',
@@ -93,11 +113,7 @@ app.post("/getToCheckList", (req, res) => {
 });
 
 app.post("/getCheckedList", (req, res) => {
-    const username = req.cookies.username;
-    const signedUsername = req.signedCookies._token;
-    
-    const isAuth = (username === signedUsername);
-    if(isAuth){
+    if(isLegal(req)){
         const list = [
                 {
                     id: '001',
@@ -132,11 +148,7 @@ app.post("/getCheckedList", (req, res) => {
 });
 
 app.post("/getDetailInfo", (req, res) => {
-    const username = req.cookies.username;
-    const signedUsername = req.signedCookies._token;
-    
-    const isAuth = (username === signedUsername);
-    if(isAuth){
+    if(isLegal(req)){
         const id = req.body.id;
         const info = {
                     id,
@@ -152,11 +164,7 @@ app.post("/getDetailInfo", (req, res) => {
 });
 
 app.post("/setPass", (req, res) => {
-    const username = req.cookies.username;
-    const signedUsername = req.signedCookies._token;
-    
-    const isAuth = (username === signedUsername);
-    if(isAuth){
+    if(isLegal(req)){
         const id = req.body.id;
         console.log("申请者 %s 通过申请。", id);
         res.json({success: true});
@@ -167,11 +175,7 @@ app.post("/setPass", (req, res) => {
 });
 
 app.post("/setFail", (req, res) => {
-    const username = req.cookies.username;
-    const signedUsername = req.signedCookies._token;
-    
-    const isAuth = (username === signedUsername);
-    if(isAuth){
+    if(isLegal(req)){
         const id = req.body.id;
         console.log("申请者 %s 未通过申请。", id);
         res.json({success: true});
@@ -189,5 +193,12 @@ function loginAuth(username, password){
     }else {
         return '';
     }
+}
+
+function isLegal(req){
+    const username = req.cookies.username;
+    const signedUsername = req.signedCookies._token;
+    
+    return (username === signedUsername);
 }
 
