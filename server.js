@@ -90,7 +90,7 @@ app.post("/getToCheckList", (req, res) => {
                 const list = results.map(item => ({
                     id: item.id,
                     name: item.username,
-                    gender: ('male'===(item.sex))?'男':'女',
+                    gender: ('M'===(item.sex))?'男':'女',
                     address: item.location,
                     identity: item.identity
                 }));
@@ -116,7 +116,7 @@ app.post("/getCheckedList", (req, res) => {
                 const list = results.map(item => ({
                     id: item.id,
                     name: item.username,
-                    gender: ('male'===(item.sex))?'男':'女',
+                    gender: ('M'===(item.sex))?'男':'女',
                     address: item.location,
                     identity: item.identity
                 }));
@@ -142,7 +142,7 @@ app.post("/getDetailInfo", (req, res) => {
                 const info = results.map(item => ({
                     id: id,
                     name: item.username,
-                    gender: ('male'===(item.sex))?'男':'女',
+                    gender: ('M'===(item.sex))?'男':'女',
                     address: item.location,
                     identity: item.identity,
                     homeimgurl: item.homeimgurl,
